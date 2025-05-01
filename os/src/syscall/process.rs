@@ -57,11 +57,12 @@ pub fn sys_trace(_trace_request: usize, _id: usize, _data: usize) -> isize {
                 0
             }
         }
-        _ => {
-            trace!("kernel: sys_trace: unknown request");
+        2 => {
+            trace!("kernel: sys_trace: 2");
             let task_manager = &TASK_MANAGER;
             let count = task_manager.get_syscall_count_for_current(_id);
             count as isize
         }
+        _ => -1 as isize,
     }
 }
